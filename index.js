@@ -3,6 +3,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 var users = [];
+var rooms = [];
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');
 });
@@ -28,7 +29,7 @@ io.on('connection', function (socket) {
               username:data.username
             })
             socket.emit('loginSuccess',data)
-            io.sockets.emit('add',data)
+            //io.sockets.emit('add',data)
         }else{
             socket.emit('loginFail','')
         }  
@@ -42,13 +43,19 @@ io.on('connection', function (socket) {
             }
         })
      });
+     //join room
+     socket.on('join room',function(data){
+        socket.join(data.roomId);
+        socket.roomId = data.roomId;
+        io.to(socket.roomId).emit('add',data);
+     });
      //message
     socket.on('sendMessage',function(data){
-        io.sockets.emit('receiveMessage',data)
+        io.to(socket.roomId).emit('receiveMessage',data)
     });
     //typing
     socket.on('sendTyping',function(data){
-        io.sockets.emit('receiveTyping',data)
+        io.to(socket.roomId).emit('receiveTyping',data)
     })
 });
 
