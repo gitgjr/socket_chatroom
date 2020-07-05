@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>chat room</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="socket.js"></script>
+</head>
+<body>
+    <div class="login-wrap">
+        <div class="login-con">
+            <h3>user login</h3>
+            <input type="text" placeholder="nick name plsase" id="loginName">
+            <button class="login-btn">login</button>
+        </div>
+    </div>
+
+    <div class="chat-wrap hide">
+        <h1>chat room</h1>
+        <div class="name-box"></div>
+        <div class="typing-box" style="display: none;"></div>
+        <div class="chat-con clearfix"></div>
+        <div class="bottom">
+            <input type="text" id="sendtxt">
+            <button class="sendBtn">send</button>
+        </div>
+    </div>
+</body>
+</html>
