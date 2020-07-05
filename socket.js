@@ -1,6 +1,7 @@
 $(function(){
     var socket = io();
     var uname = null;//login name
+    var roomId = null;//roomId
     $('.login-btn').click(function(){
         uname = $.trim($('#loginName').val());
         if(uname){
@@ -14,7 +15,7 @@ $(function(){
 
     socket.on('loginSuccess',function(data){
         if(data.username === uname){
-            checkin(data)
+            checkin1(data)
         }else{
             alert('user not match')
         }
@@ -25,19 +26,24 @@ $(function(){
     });
 
     socket.on('add',function(data){
-        var html = '<p>system message:  '+data.username+' joined the chat</p>';
+        checkin2();
+        var html = '<p>system message:  '+data.username+' joined the room</p>';
         $('.chat-con').append(html);
         showname();
     });
 
-    function checkin(data){
+    function checkin1(data){
         $('.login-wrap').hide('slow');
+        $('.room-wrap').show('slow');
+    }
+    function checkin2(data){
+        $('.room-wrap').hide('slow');
         $('.chat-wrap').show('slow');
     }
     // leave
     socket.on('leave',function(name){
         if(name != null){
-            var html = '<p>system message:'+name+'has leave</p>';
+            var html = '<p>system message:'+name+' has left chat room</p>';
             $('.chat-con').append(html);
         }
     })
@@ -46,7 +52,17 @@ $(function(){
         $('.name-box').html("<h3>"+"online username:"+uname+"</h3>");
     }
 
-
+    //room system
+    $('.room-btn').click(function(){
+        roomId = $.trim($('#roomId').val());
+        if(roomId){
+            socket.emit('join room',{roomId:roomId,username:uname})
+            $('.room-name').html("<h3>"+"chat room Id:"+roomId+"</h3>")
+        }else{
+            alert('please input roomId')
+        }
+    });
+    // send message
     $('.sendBtn').click(function(){
         sendMessage()
     });
