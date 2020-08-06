@@ -4,33 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
     <title>chat room</title>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="socket.io/socket.io.js"></script>
     <script type="text/javascript" src="socket.js"></script>
 </head>
 <body>
+    <div class="note">
+        <p>room id`s type:</p>
+        <p>Private chat:1000~1999</p>
+        <p>Chatroom:2000~2999</p>
+        <p>how to join a new chat:</p>
+        <p>login again and input chat id or your friend`s id to join a new chat</p>
+    </div>
     <div class="login-wrap">
         <div class="login-con">
             <h3>user login</h3>
-            <input type="text" placeholder="nick name plsase" id="loginName">
+            <input type="text" placeholder="id plsase" id="loginName">
+            <input type="text" placeholder="password plsase" id="password">
             <button class="login-btn">login</button>
+            <br>
+            <button class="go-signup">have no account?sign up now</button>
         </div>
     </div>
     <div class="room-wrap" style="display: none;">
-        <h3>choose chat-room</h3>
-        <input type="text" placeholder="chat room plsase" id="roomId">
-        <button class="room-btn">join</button>
-    </div>
-
-    <div class="chat-wrap hide" style="display: none;">
-        <h1 class="room-name">chat room</h1>
         <div class="name-box"></div>
-        <div class="typing-box" style="display: none;"></div>
+        <h2>Chatroom</h2>
+        <input type="text" placeholder="chat room id plsase" id="roomId">
+        <button class="room-btn">join</button>
+        <button class="create-btn">create new room</button>
+        <h2>Private chat</h2>
+        <input type="text" placeholder="your friend`s id" id="targetId">
+        <button class="pc-btn">create Private chat room</button>
+    </div>
+    <div class="signup-wrap" style="display: none;">
+        <div class="signup">
+            <h3>new user sign up</h3>
+            <input type="text" placeholder="id plsase" id="new_loginName">
+            <input type="text" placeholder="password plsase" id="new_password">
+            <button class="signup-btn">sign up</button>
+
+        </div>
+    </div>
+    <div class="chat-wrap" style="display: none;">
+        <div class="room-name">chat room</div>
+        <div class="name-box"></div>
+        <div class="typing-box"></div>
         <div class="chat-con clearfix"></div>
         <div class="bottom">
             <input type="text" id="sendtxt">
             <button class="sendBtn">send</button>
         </div>
+        <br>
+        <div class="live_list">
+            <button class="show-btn">Display status of all users</button>>
+            <p>user list:</p>
+        </div>
+
     </div>
+    <div class="quit" style="display: none;">   
+        <button class="quit-btn">quit this room</button>
+     </div >
+    <div class="logout-warp" style="display: none;">
+        <div class="bottom">
+            <button class="logout-btn">logout</button>
+        </div>
+    </div>
+
+
 </body>
 </html>
